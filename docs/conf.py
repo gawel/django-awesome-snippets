@@ -217,3 +217,5 @@ man_pages = [
 
 import sys
 sys.path.extend(['..', '../tests'])
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
