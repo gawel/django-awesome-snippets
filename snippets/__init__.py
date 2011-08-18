@@ -23,8 +23,6 @@ class Snippet(property):
             self.delay = delay
         else:
             self.delay = getattr(settings, 'SNIPPETS_CACHE_DELAY', None)
-        if func:
-            self.__doc__ = func.__doc__
 
     def render(self, instance):
         if self.template:
@@ -43,9 +41,10 @@ class Snippet(property):
         return value
 
     def key(self, instance):
-        return 'snippets-%s-%s-%s-%s' % (instance._meta.app_label,
+        value = 'snippets-%s-%s-%s-%s' % (instance._meta.app_label,
                                          instance.__class__.__name__.lower(),
-                                         self.name, instance.id)
+                                         self.name, instance.pk)
+        return value.lower()
 
     def purge(self, instance):
         cache.set(self.key(instance), '', 1)
@@ -59,7 +58,7 @@ class Snippet(property):
             if not value:
                 value = self.render(instance)
                 cache.set(key, value, self.delay)
-        return value
+            return value
 
     def __call__(self, func):
         self.func = func
