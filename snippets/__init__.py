@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 try:
     from django.conf import settings
-except ImportError:
-    pass
-else:
     from django.core.cache import cache
     from django.template.loader import render_to_string
+except ImportError:
+    pass
 
 
 class Snippet(property):
