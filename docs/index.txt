@@ -31,6 +31,12 @@ Module content
 
 .. autofunction:: purge
 
+Bugs
+====
+
+Use the github `tracker
+<https://github.com/gawel/django-awesome-snippets/issues>`_
+
 Indices and tables
 ==================
 
