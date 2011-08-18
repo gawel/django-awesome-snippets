@@ -214,3 +214,6 @@ man_pages = [
     ('index', 'django-awesome-snippets', u'django-awesome-snippets Documentation',
      [u'Gael Pasgrimaud'], 1)
 ]
+
+import sys
+sys.path.extend('..', '../tests')
