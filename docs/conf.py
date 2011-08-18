@@ -216,4 +216,4 @@ man_pages = [
 ]
 
 import sys
-sys.path.extend('..', '../tests')
+sys.path.extend(['..', '../tests'])
