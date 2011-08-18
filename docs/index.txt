@@ -1,0 +1,40 @@
+.. django-awesome-snippets documentation master file, created by
+   sphinx-quickstart on Thu Aug 18 20:09:20 2011.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to django-awesome-snippets's documentation!
+===================================================
+
+.. automodule:: snippets
+
+.. toctree::
+   :maxdepth: 2
+
+A snippet is a class attribute that use a template to render his value. A kind
+of template tag but as an instance attribut.
+
+The snippet will use the template
+``{app_label}/snippets/{model}_{name|func_name}.html`` by default.
+
+The current ``object``, the  ``settings`` and the ``MEDIA_URL`` are available
+in the template by default.
+
+There is various way to use the snippet decorator:
+
+.. literalinclude:: ../tests/__init__.py
+
+Module content
+==============
+
+.. autofunction:: snippet
+
+.. autofunction:: purge
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
