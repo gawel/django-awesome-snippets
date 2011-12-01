@@ -9,7 +9,7 @@ except ImportError:
 
 class Snippet(property):
 
-    def __init__(self, func=None, name=None, template=None, delay=None):
+    def __init__(self, func=None, name=None, template=None, delay=None, cache_field=None):
         self.func = func
         self.name = self.__doc__ = None
         if func:
@@ -23,6 +23,7 @@ class Snippet(property):
             self.delay = delay
         else:
             self.delay = getattr(settings, 'SNIPPETS_CACHE_DELAY', None)
+        self.cache_field = cache_field
 
     def render(self, instance):
         if self.template:
@@ -41,9 +42,15 @@ class Snippet(property):
         return value
 
     def key(self, instance):
+        if self.cache_field:
+            field = getattr(instance, self.cache_field)
+            if hasattr(field, 'pk'):
+                field = field.pk
+        else:
+            field = instance.pk
         value = 'snippets-%s-%s-%s-%s' % (instance._meta.app_label,
                                          instance.__class__.__name__.lower(),
-                                         self.name, instance.pk)
+                                         self.name, field)
         return value.lower()
 
     def purge(self, instance):
@@ -77,4 +84,3 @@ def purge(instance):
     for v in klass.__dict__.values():
         if isinstance(v, Snippet) and v.delay is not None:
             v.purge(instance)
-
