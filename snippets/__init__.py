@@ -33,7 +33,8 @@ class Snippet(property):
                                                    instance.__class__.__name__.lower(),
                                                    self.name)
         ctx = dict(object=instance, settings=settings,
-                   MEDIA_URL=settings.MEDIA_URL)
+                   MEDIA_URL=settings.MEDIA_URL,
+                   STATIC_URL=settings.STATIC_URL)
         if self.func:
             vars = self.func(instance)
             if isinstance(vars, dict):
